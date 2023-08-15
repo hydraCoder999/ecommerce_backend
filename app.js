@@ -13,7 +13,15 @@ const passport = require("passport");
 require("./utils/Passport");
 const session = require("express-session");
 const googlerouter = require("./Routes/GoogleRoutes");
+const cors = require("cors");
 
+// Allow requests from your frontend domain
+app.use(
+  cors({
+    origin: "https://samecomm.000webhostapp.com/", // Replace with your frontend domain
+    optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
+  })
+);
 //middleware
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
