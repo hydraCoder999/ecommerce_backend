@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path"); // Add this line to import the path module
 const productRouter = require("./Routes/productRoutes");
 const errormiddleware = require("./middleware/errormiddleware");
 const userRouter = require("./Routes/userRoutes");
@@ -15,10 +16,12 @@ const session = require("express-session");
 const googlerouter = require("./Routes/GoogleRoutes");
 const cors = require("cors");
 
+app.use(express.static(path.join(__dirname, "./dist")));
+
 // Allow requests from your frontend domain
 app.use(
   cors({
-    origin: "https://samecomm.000webhostapp.com/", // Replace with your frontend domain
+    origin: "", // Replace with your frontend domain
     optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
   })
 );
@@ -47,9 +50,7 @@ app.use(passport.session());
 // });
 
 // Routes googlke
-app.get("/", (req, res) => {
-  res.send("WELCOME");
-});
+
 app.use("/auth", googlerouter);
 app.use("/api/v1/category", CategoryRouter);
 app.use("/api/v1/products", productRouter);

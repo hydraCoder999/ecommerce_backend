@@ -151,7 +151,9 @@ exports.ForgotPasswordController = async (req, res) => {
     // )}/api/v1/password/reset/${resetToken}`;
 
     //genarate on frontend Url
-    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${req.protocol}://${req.get(
+      "host"
+    )}/password/reset/${resetToken}`;
 
     const message = `Your Reset Password Token is  == \n\n  ${resetPasswordUrl} \n\n if You Have Not requested this Email then , Please Error `;
 
